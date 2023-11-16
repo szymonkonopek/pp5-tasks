@@ -1,151 +1,74 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
   <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Bootstrap demo</title>
-    <link
-      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
-      rel="stylesheet"
-      integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN"
-      crossorigin="anonymous"
-    />
-    <link rel="stylesheet" href="/static/css/style.css" />
+    <link rel="stylesheet" href="assets/style/style.css">
+    <!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous"> -->
+    <script src="assets/js/customer.js"></script>
+    <script src="assets/js/index.js"></script>
   </head>
   <body>
-    <div id="showUserInfo" style="display: none">
-      <h1>Show form</h1>
-      <ul>
-        <div id="data-container"></div>
-      </ul>
-      <button class="btn btn-primary" onclick="showForm()">Show form</button>
-    </div>
-    <div id="loginForm">
-      <h1 id="login-form">Form</h1>
-      <ul>
-        <li>Login form</li>
-      </ul>
-      <div class="justify-content-center">
-        <div class="w-50">
-          <form onsubmit="return false">
-            <div class="mb-3 content-center">
-              <label for="company-name" class="form-label">Company name</label>
-              <input type="text" class="form-control" id="company-name" />
-            </div>
-            <div class="mb-3">
-              <label for="nip" class="form-label">NIP</label>
-              <input type="number" class="form-control" id="nip" required />
-            </div>
-            <div class="mb-3">
-              <label for="city" class="form-label">City</label>
-              <input type="text" class="form-control" id="city" required />
-            </div>
-            <div class="mb-3">
-              <label for="street" class="form-label">Street</label>
-              <input type="text" class="form-control" id="street" required />
-            </div>
-            <div class="mb-3">
-              <label for="house-number" class="form-label">House nr</label>
-              <input type="number" class="form-control" id="house-number" />
-            </div>
-            <div class="mb-3">
-              <label for="zipcode" class="form-label">Zip code</label>
-              <input type="text" class="form-control" id="zipcode" required />
-            </div>
-            <div>
-              <div class="mb-3">
-                <label for="comments" class="form-label">Comments</label>
-                <textarea
-                  type="text"
-                  class="form-control"
-                  id="comments"
-                ></textarea>
+    <div class="container">
+      <div id="client-list">
+        <ul class="list-group" id="customer-list">
+          <!-- Wstaw tutaj liste klientow -->
+        </ul>
+        <button type="button" class="btn btn-primary" onclick="showForm()">Add new customer</button>      
+      </div>
+      <div class="form" id="client-form" style="display: none;">
+        <h1 id="login-form">Form</h1>
+        <div class="d-flex justify-content-center">
+          <div class="w-50">
+            <form  onsubmit="return save(event)">
+              <div class="mb-3 content-center">
+                <label for="company-name" class="form-label">Company name</label>
+                <input type="text" class="form-control" id="company-name">
               </div>
               <div class="mb-3">
-                <label for="industry" class="form-label">Industry</label>
-                <select type="number" class="form-control" id="industry">
-                  <option>Informatyka</option>
-                  <option>Kosmetyka</option>
-                </select>
+                <label for="nip" class="form-label">NIP</label>
+                <input type="number" class="form-control" id="nip" required>
               </div>
-              <div class="mb-3 form-check">
-                <input type="checkbox" class="form-check-input" id="active" />
-                <label class="form-check-label" for="active">Active</label>
+              <div class="mb-3">
+                  <label for="city" class="form-label">City</label>
+                  <input type="text" class="form-control" id="city" required>
+                </div>
+                <div class="mb-3">
+                  <label for="street" class="form-label">Street</label>
+                  <input type="text" class="form-control" id="street" required>
+                </div>
+                <div class="mb-3">
+                  <label for="house-number" class="form-label">House nr</label>
+                  <input type="TEXT" class="form-control" id="house-number">
+                </div>
+                <div class="mb-3">
+                  <label for="zipcode" class="form-label">Zip code</label>
+                  <input type="text" class="form-control" id="zipcode" required>
+                </div>
+              <div>
+                <div class="mb-3">
+                  <label for="comments" class="form-label">Comments</label>
+                  <textarea type="text" class="form-control" id="comments"></textarea>
+                </div>
+                <div class="mb-3">
+                  <label for="industry" class="form-label">Industry</label>
+                  <select type="number" class="form-control" id="industry">
+                    <option value="1">Informatyka</option>
+                    <option value="2">Kosmetyka</option>
+                  </select>
+                </div>
+                <div class="mb-3 form-check">
+                  <input type="checkbox" class="form-check-input" id="active">
+                  <label class="form-check-label" for="active">Active</label>
+                </div>
               </div>
-            </div>
-            <button type="submit" class="btn btn-primary" onclick="save()">
-              Save
-            </button>
-          </form>
-          <button class="btn btn-primary" onclick="submit()">
-            Add to form
-          </button>
+              <button type="submit" class="btn btn-primary" >Save</button>
+            </form>
+          </div>
         </div>
       </div>
     </div>
-    <script
-      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
-      integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
-      crossorigin="anonymous"
-    ></script>
-    <script>
-      let users = [];
-
-      function showForm() {
-        document.getElementById("loginForm").style.display = "block";
-        document.getElementById("showUserInfo").style.display = "none";
-      }
-
-      function save() {
-        let newCustomer = {
-          name: document.getElementById("company-name").value,
-          nip: document.getElementById("nip").value,
-          city: document.getElementById("city").value,
-          street: document.getElementById("street").value,
-          houseNumber: document.getElementById("house-number").value,
-          zipCode: document.getElementById("zipcode").value,
-          comments: document.getElementById("comments").value,
-          industry: document.getElementById("industry").value,
-          active: document.getElementById("active").checked,
-        };
-
-        users.push(newCustomer.name);
-
-        document.getElementById("loginForm").style.display = "none";
-        document.getElementById("showUserInfo").style.display = "block";
-        document.getElementById("data-container").innerHTMLŔ = "";
-        const dataContainer = document.getElementById("data-container");
-
-        console.log(users[0]);
-
-        users.forEach((item) => {
-          const itemElement = document.createElement("button");
-          itemElement.innerHTML = `Name: ${item}`;
-          dataContainer.appendChild(itemElement);
-        });
-      }
-      function submit() {
-        let newCustomer = {
-          name: "Adam",
-          nip: 1234,
-          city: "Mrągowo",
-          street: "Majowa",
-          houseNumber: 8,
-          zipCode: 99999,
-          comments: "1234567",
-          industry: "Mleczarska",
-          active: true,
-        };
-        document.getElementById("company-name").value = newCustomer.name;
-        document.getElementById("nip").value = newCustomer.nip;
-        document.getElementById("city").value = newCustomer.city;
-        document.getElementById("street").value = newCustomer.street;
-        document.getElementById("house-number").value = newCustomer.houseNumber;
-        document.getElementById("zipcode").value = newCustomer.zipCode;
-        document.getElementById("comments").value = newCustomer.comments;
-        document.getElementById("industry").value = newCustomer.industry;
-        document.getElementById("active").checked = newCustomer.active;
-      }
-    </script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
   </body>
 </html>
